@@ -12,6 +12,10 @@ body {
     width: 216px;
     background-color: #d3d3d3;
     margin: 5px;
+    font-size: 50px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 .container {
