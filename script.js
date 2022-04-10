@@ -7,10 +7,6 @@ let currentNum = "";
 let operator = "";
 let answer = "";
 
-function operate(previousNum, currentNum, operator) {
-
-}
-
 numbers.forEach(currentBtn => {
     currentBtn.addEventListener('click', function(e){
         if (operator === "") {
