@@ -2,70 +2,74 @@ const numbers = document.querySelectorAll('.numbers')
 const operators = document.querySelectorAll('.operator')
 const cleared = document.querySelector('.cleared')
 
-let firstNum = "";
-let secondNum = "";
-let operator = "+";
+let previousNum = "";
+let currentNum = "";
+let operator = "";
+let answer = "";
+
+function operate(previousNum, currentNum, operator) {
+
+}
 
 numbers.forEach(currentBtn => {
     currentBtn.addEventListener('click', function(e){
         if (operator === "") {
             document.querySelector('.header').textContent += e.target.innerText;
-            firstNum += e.target.innerText;
-            console.log(firstNum)
+            previousNum += e.target.innerText;
+            return previousNum
         } else {
             document.querySelector('.header').textContent += e.target.innerText;
-            secondNum += e.target.innerText;
-            console.log(secondNum)
+            currentNum += e.target.innerText;
+            return currentNum
         }
     })
 })
 
-function operate(firstNum, secondNum, operator) {
-
-}
-
-
 operators.forEach(op => {
-    op.addEventListener('.click', e => {
+    op.addEventListener('click', e => {
         if (e.target.innerText !== "=") {
             operator = e.target.innerText;
-
-            console.log(firstNum)
-            console.log(operator)
-        } else {
+            document.querySelector('.header').textContent = "";
+            return operator
+        } else if (e.target.innerText == "=" ) {
             switch(operator) {
                 case "+":
-                    document.querySelector('.header').textContent = parseInt(firstNum) + parseInt(secondNum);
+                    answer = parseInt(previousNum) + parseInt(currentNum);
+                    document.querySelector('.header').textContent = answer;
                     break;
-                
+            
                 case "-":
-                    document.querySelector('.header').textContent = parseInt(firstNum) - parseInt(secondNum);
-                    break;
+                    answer = parseInt(previousNum) - parseInt(currentNum);
+                    document.querySelector('.header').textContent = answer;                    break;
                 
                 case "*":
-                    document.querySelector('.header').textContent = parseInt(firstNum) * parseInt(secondNum);
-                    break;
+                    answer = parseInt(previousNum) * parseInt(currentNum);
+                    document.querySelector('.header').textContent = answer;                    break;
 
                 case "/":
-                    document.querySelector('.header').textContent = parseInt(firstNum) / parseInt(secondNum);
-                    break;
+                    answer = parseInt(previousNum) / parseInt(currentNum);
+                    document.querySelector('.header').textContent = answer;                    break;
                 
                 default:
-                    break;
+                    return;
             }
+            previousNum = answer;
+            answer = "";
+            currentNum = "";
+            operator = "";
         }
     })
 })
 
 
 cleared.addEventListener('click', function(){
-    firstNum = "";
-    secondNum = "";
+    previousNum = "";
+    currentNum = "";
     operator = "";
     document.querySelector('.header').textContent = "";
 })
 
 // equals.addEventListener('click', function(){
-//     total = operate(firstNum, secondNum, operator)
+//     total = operate(previousNum, currentNum, operator)
 //     document.querySelector('.header').textContent = total;
 // })
